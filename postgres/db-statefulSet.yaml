@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgresdb
+spec:
+  serviceName: postgresdb
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgresdb
+  template:
+    metadata:
+      labels:
+        app: postgresdb
+    spec:
+      containers:
+      - name: postgresdb
+        image: postgres:latest
+        envFrom:
+        # Load the environment variables/PostgresSQL credentials
+        - configMapRef:
+            # This should be the ConfigMap name created ealier
+            name: db-secret-credentials
+        # - name: POSTGRES_PASSWORD
+        #   value: "yourpassword"
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - name: postgres-storage
+          mountPath: /var/lib/postgresql/data
+        - name: postgres-config
+          mountPath: /docker-entrypoint-initdb.d
+      volumes:
+      - name: postgres-config
+        configMap:
+          name: postgres-config
+  volumeClaimTemplates:
+  - metadata:
+      name: postgres-storage
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 5Gi
+  - metadata:
+      name: postgres-config
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests: 
+          storage: 5Mi        

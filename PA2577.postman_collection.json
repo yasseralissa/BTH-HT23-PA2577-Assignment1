@@ -1,0 +1,245 @@
+{
+	"info": {
+		"_postman_id": "4b3b3161-17e2-4825-91ff-e9c42383baea",
+		"name": "PA2577",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8809196"
+	},
+	"item": [
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Create order",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.variables.set(\"$\")"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{$guid}}\",\r\n    \"orderDate\": \"{{$isoTimestamp}}\",\r\n    \"customerName\": \"a test customer\",\r\n    \"deliveryAddress\": \"a delivery address\",\r\n    \"invoiceAddress\": \"an invoice address\",\r\n    \"orderLines\": [\r\n        {\r\n            \"id\": \"{{$guid}}\",\r\n            \"lineNum\": 1,\r\n            \"orderedQuantity\": 3\r\n        },\r\n        {\r\n            \"id\": \"{{$guid}}\",\r\n            \"lineNum\": 2,\r\n            \"orderedQuantity\": 2\r\n        },\r\n        {\r\n            \"id\": \"{{$guid}}\",\r\n            \"lineNum\": 3,\r\n            \"orderedQuantity\": 1\r\n        },\r\n        {\r\n            \"id\": \"{{$guid}}\",\r\n            \"lineNum\": 4,\r\n            \"orderedQuantity\": 1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{clusterUrl}}/Order",
+							"host": [
+								"{{clusterUrl}}"
+							],
+							"path": [
+								"Order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{clusterUrl}}/Order",
+							"host": [
+								"{{clusterUrl}}"
+							],
+							"path": [
+								"Order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get specific order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{clusterUrl}}/Order/6c1d6817-4e44-4761-aaa1-28785905ba62",
+							"host": [
+								"{{clusterUrl}}"
+							],
+							"path": [
+								"Order",
+								"6c1d6817-4e44-4761-aaa1-28785905ba62"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update specific order",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"6c1d6817-4e44-4761-aaa1-28785905ba62\",\r\n    \"orderDate\": \"2023-11-01T12:00:00Z\",\r\n    \"customerName\": \"a test customer\",\r\n    \"deliveryAddress\": \"a delivery address\",\r\n    \"invoiceAddress\": \"an invoice address\",\r\n    \"orderLines\": [\r\n        {\r\n            \"id\": \"03c29c91-0631-49a9-97b5-471ec2db3961\",\r\n            \"lineNum\": 2,\r\n            \"orderId\": \"6c1d6817-4e44-4761-aaa1-28785905ba62\",\r\n            \"productId\": \"00000000-0000-0000-0000-000000000000\",\r\n            \"orderedQuantity\": 2\r\n        },\r\n        {\r\n            \"id\": \"4436c172-ec2b-4959-b10c-766f2b65b645\",\r\n            \"lineNum\": 4,\r\n            \"orderId\": \"6c1d6817-4e44-4761-aaa1-28785905ba62\",\r\n            \"productId\": \"00000000-0000-0000-0000-000000000000\",\r\n            \"orderedQuantity\": 1\r\n        },\r\n        {\r\n            \"id\": \"7444d6d9-c958-43ee-a0d2-0b84f3d045a3\",\r\n            \"lineNum\": 3,\r\n            \"orderId\": \"6c1d6817-4e44-4761-aaa1-28785905ba62\",\r\n            \"productId\": \"00000000-0000-0000-0000-000000000000\",\r\n            \"orderedQuantity\": 1\r\n        },\r\n        {\r\n            \"id\": \"8ff2bc76-b48a-4579-911e-61c431486287\",\r\n            \"lineNum\": 1,\r\n            \"orderId\": \"6c1d6817-4e44-4761-aaa1-28785905ba62\",\r\n            \"productId\": \"00000000-0000-0000-0000-000000000000\",\r\n            \"orderedQuantity\": 3\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{clusterUrl}}/Order/6c1d6817-4e44-4761-aaa1-28785905ba62",
+							"host": [
+								"{{clusterUrl}}"
+							],
+							"path": [
+								"Order",
+								"6c1d6817-4e44-4761-aaa1-28785905ba62"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Create product",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"{{$guid}}\",\r\n    \"name\": \"{{$randomProductName}}\",\r\n    \"price\": {{$randomInt}},\r\n    \"description\": \"{{$randomProductName}}\",\r\n    \"author\": \"{{$randomCompanyName}}\",\r\n    \"publisher\": \"{{$randomCompanyName}}\",\r\n    \"quantity\": {{$randomInt}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{clusterUrl}}/Product",
+							"host": [
+								"{{clusterUrl}}"
+							],
+							"path": [
+								"Product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"a9a51290-5325-440b-a83a-ce9eda3dbd81\",\r\n    \"name\": \"Product 2\",\r\n    \"price\": 230,\r\n    \"description\": \"Desc of product 2\",\r\n    \"author\": \"Author 2\",\r\n    \"publisher\": \"Publisher 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{clusterUrl}}/Product/a9a51290-5325-440b-a83a-ce9eda3dbd81",
+							"host": [
+								"{{clusterUrl}}"
+							],
+							"path": [
+								"Product",
+								"a9a51290-5325-440b-a83a-ce9eda3dbd81"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get specific product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{clusterUrl}}/Product/a9a51290-5325-440b-a83a-ce9eda3dbd81",
+							"host": [
+								"{{clusterUrl}}"
+							],
+							"path": [
+								"Product",
+								"a9a51290-5325-440b-a83a-ce9eda3dbd81"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{clusterUrl}}/Product",
+							"host": [
+								"{{clusterUrl}}"
+							],
+							"path": [
+								"Product"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "clusterUrl",
+			"value": "http://myapp.local:30157",
+			"type": "string"
+		}
+	]
+}

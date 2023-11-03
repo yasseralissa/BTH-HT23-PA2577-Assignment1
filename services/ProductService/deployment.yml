@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: product-serivce-config
+  labels:
+    data: config
+data:
+  host: "NOTSET"
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: product-serivce-secret
+  labels:
+    data: prodsvc-secret
+type: Opaque
+data:
+  postgresdb_cn: "SG9zdD1wb3N0Z3Jlc2RiLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWw7UG9ydD01NDMyO0RhdGFiYXNlPXByb2R1Y3RkYjtVc2VybmFtZT10ZXN0VXNlcjtQYXNzd29yZD10ZXN0UGFzc3dvcmQ="
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-serivce-deployment
+spec:
+  selector:
+    matchLabels:
+      app: product-serivce-pod
+  template:
+    metadata:
+      labels:
+        app: product-serivce-pod
+    spec:
+      containers:
+      - name: product-serivce-container
+        image: yaseralissa/product-service:latest
+        imagePullPolicy: Always #Never
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+        env:
+        - name: DB_ConnectionString
+          valueFrom:
+            secretKeyRef: 
+              name: product-serivce-secret
+              key: postgresdb_cn
+        - name: DB_Host
+          valueFrom:
+            configMapKeyRef:
+              name: product-serivce-config
+              key: host

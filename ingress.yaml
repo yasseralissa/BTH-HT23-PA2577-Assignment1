@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: product-ingress
+  annotations:
+    # Add any required annotations for your specific Ingress controller
+    #    nginx.ingress.kubernetes.io/rewrite-target: /Product
+    nginx.ingress.kubernetes.io/enable-rewrite-log: "true"
+
+spec:
+  ingressClassName: nginx
+
+  rules:
+  - host: myapp.local
+    http:
+      paths:
+      - path: /Product
+        pathType: Prefix
+        backend:
+          service:
+            name: product-serivce-service
+            port:
+              number: 8080
+      - path: /Order
+        pathType: Prefix
+        backend:
+          service:
+            name: order-serivce-service
+            port:
+              number: 8090
